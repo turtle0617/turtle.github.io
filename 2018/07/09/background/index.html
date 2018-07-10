@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CSS 沒有亂數及變數命名，那我們要如何達到用CSS呈現出亂數背景呢？在此之前，先向大家介紹一個小知識The Cicada PrincipleThe Cicada Principle - 蟬原則“蟬原則”源自於北美的週期性蟬，在每7,13或17年出現，找到配偶並死亡。那為什麼剛好是在7,13或17年出現呢？是還是刻意選擇好的還是純粹是剛好，這個問題便吸引了一部分科學家的好奇。研究後發現這些數字確實">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Background - 擬亂數背景">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/background/index.html">
+<meta property="og:site_name" content="Coding_turtle">
+<meta property="og:description" content="CSS 沒有亂數及變數命名，那我們要如何達到用CSS呈現出亂數背景呢？在此之前，先向大家介紹一個小知識The Cicada PrincipleThe Cicada Principle - 蟬原則“蟬原則”源自於北美的週期性蟬，在每7,13或17年出現，找到配偶並死亡。那為什麼剛好是在7,13或17年出現呢？是還是刻意選擇好的還是純粹是剛好，這個問題便吸引了一部分科學家的好奇。研究後發現這些數字確實">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://yoursite.com/2018/07/09/background/bg1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/09/background/bg2.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/09/background/bg3.png">
+<meta property="og:updated_time" content="2018-07-10T03:14:41.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Background - 擬亂數背景">
+<meta name="twitter:description" content="CSS 沒有亂數及變數命名，那我們要如何達到用CSS呈現出亂數背景呢？在此之前，先向大家介紹一個小知識The Cicada PrincipleThe Cicada Principle - 蟬原則“蟬原則”源自於北美的週期性蟬，在每7,13或17年出現，找到配偶並死亡。那為什麼剛好是在7,13或17年出現呢？是還是刻意選擇好的還是純粹是剛好，這個問題便吸引了一部分科學家的好奇。研究後發現這些數字確實">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/09/background/bg1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/background/"/>
+
+
+
+
+
+  <title>CSS Background - 擬亂數背景 | Coding_turtle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding_turtle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Frontend-Devloper junior</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/background/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="turtle">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/headshot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding_turtle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS Background - 擬亂數背景</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T19:44:49+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <html><br><head></head><br><body><br>CSS 沒有亂數及變數命名，那我們要如何達到用CSS呈現出亂數背景呢？<br>在此之前，先向大家介紹一個小知識<br><h1>The Cicada Principle</h1><br><h2>The Cicada Principle - 蟬原則</h2><br>“蟬原則”源自於北美的週期性蟬，在每7,13或17年出現，找到配偶並死亡。<br>那為什麼剛好是在7,13或17年出現呢？是還是刻意選擇好的還是純粹是剛好，這個問題便吸引了一部分科學家的好奇。<br>研究後發現這些數字確實是有共通處，這些數字都是所謂的質數，也就是自己才能剛好整除自己，但這跟質數又有什麼關係呢？<br>原來蟬的天敵鳥類、蜘蛛、黃蜂、魚和蛇，牠們的生命週期通常都是2~6年。<br>因此，如果蟬的生命週期是12年出現一次，那在2、3、4、6年都有機會遇到牠們的天敵。<br>還有一個很原因就是同區域的蟬並不止有一個種群，使用質數當作生命週期可以大大降低同時出現互相競爭捕食的局面。<br>所以這種以質數作為循環週期來增加”自然隨機性”的策略就稱之為”蟬原則”。<br><h3>那這跟我們要做的亂數背景又有什麼關係呢？</h3><br>我們都知道background 可以用 linear-gradient 產生條紋背景（如下圖）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(90deg,</span><br><span class="line">              yellow 15%, mediumseagreen 0, mediumseagreen 40%,</span><br><span class="line">              dimgray 0, dimgray 65%, lemonchiffon 0);</span><br><span class="line">background-size: 80px 100%;</span><br></pre></td></tr></table></figure><br><br><img src="/2018/07/09/background/bg1.png"><br>可以看到圖片的條紋背景有非常明顯的重複性。<br>那如果我們把每一個條紋都設一個背景區塊是否就能降低重複率呢？<br>廢話不多說，馬上來實作看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">background: lemonchiffon;</span><br><span class="line">background-image: </span><br><span class="line">    linear-gradient(90deg,yellow 10px,transparent 0),</span><br><span class="line">    linear-gradient(90deg,saddlebrown 20px,transparent 0),</span><br><span class="line">    linear-gradient(90deg,greenyellow 20px,transparent 0);</span><br><span class="line">  </span><br><span class="line">background-size: 80px 100%,60px 100%,40px 100%;</span><br></pre></td></tr></table></figure><br>這變要注意到,linear-gradient在第一行的權限是最大的，可以覆蓋下面所有的顏色，<br>越往下寫權限越低，以此類推。<br><img src="/2018/07/09/background/bg2.png"><br><a href="https://codepen.io/turtle0617/pen/rrNBmM?editors=0100" target="_blank" rel="noopener">來玩玩看兩個例子吧</a><br><br>可以看到圖片中的重複率確實是比上一張圖低了許多，但我們還是可以看到在240px處後會開始產生重複。<br>為什麼是240px呢？這是因為當今天用多個背景區塊時重複率將會採所有區塊的最小公倍數。<br>可以看到我們剛剛用了80、60、40，最小公倍數為240，所以在240px後就會開始產生重複。<br>這時候我們就可以回到我們一開始的主題”蟬原則”，前面有提到過質數只能自己除以自己，所以今天用質數當作背景的大小時<br>最小公倍數就會是該數字的相成，讓我們來看看實例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">background: lemonchiffon;</span><br><span class="line">background-image: </span><br><span class="line">      linear-gradient(90deg, yellow 11px,transparent 0), </span><br><span class="line">      linear-gradient(90deg, mediumseagreen 23px,transparent 0), </span><br><span class="line">      linear-gradient(90deg, dimgray 41px, transparent 0);</span><br><span class="line">background-size: 41px 100%,61px 100%,83px 100%;</span><br></pre></td></tr></table></figure><br>為了保持最大隨機數，在條紋的寬度也用質數去替代，避免條紋寬度最小公倍數過小。<br><a href="https://codepen.io/turtle0617/pen/rrNBLe?editors=0100" target="_blank" rel="noopener">範例</a><br><img src="/2018/07/09/background/bg3.png"><br>可以看到圖片中已經沒有任何地方有重複的了，<br>因為現在的最小公倍數為 41 x 61 x 83 = 207853，<br>也就是說要在207853px後才會看到第一個重複，但這也已經超過現有螢幕的最大解析度了。<br></body><br></html>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/09/測試/" rel="next" title="測試">
+                <i class="fa fa-chevron-left"></i> 測試
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/headshot.jpg"
+                alt="turtle" />
+            
+              <p class="site-author-name" itemprop="name">turtle</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/turtle0617" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">The Cicada Principle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">The Cicada Principle - 蟬原則</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">那這跟我們要做的亂數背景又有什麼關係呢？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">turtle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
